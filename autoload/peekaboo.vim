@@ -88,7 +88,7 @@ function! s:open(mode)
   execute get(g:, 'peekaboo_window', s:default_window)
   let s:buf_peekaboo = bufnr('')
   setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  \ modifiable statusline=>\ Registers nocursorline nofoldenable
+  \ modifiable statusline=%#Background# nocursorline nofoldenable
   if exists('&relativenumber')
     setlocal norelativenumber
   endif
