@@ -25,7 +25,7 @@ set cpo&vim
 
 " Default options
 let s:default_delay = 0
-let s:default_window = 'vertical botright 30new'
+let s:default_window = 'vertical botright 40new'
 let s:default_compact = 0
 
 let s:QUOTE  = '"'
