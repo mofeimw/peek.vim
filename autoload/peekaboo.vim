@@ -56,6 +56,9 @@ endfunction
 
 " Closes peekaboo buffer
 function! s:close()
+  " restore EOB color
+  exe "hi EndOfBuffer ctermfg=" s:eob
+
   silent! execute 'bd' s:buf_peekaboo
   let s:buf_peekaboo = 0
   execute s:winrestcmd
@@ -84,11 +87,15 @@ endfunction
 
 " Opens peekaboo window
 function! s:open(mode)
+  " save current EOB color and hide ~'s
+  let s:eob = synIDattr(synIDtrans(hlID('EndOfBuffer')), 'fg')
+  highlight EndOfBuffer ctermfg=0
+
   let [s:buf_current, s:buf_alternate, s:winrestcmd] = [@%, @#, winrestcmd()]
   execute get(g:, 'peekaboo_window', s:default_window)
   let s:buf_peekaboo = bufnr('')
   setlocal nonumber buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  \ modifiable statusline=%#Background# nocursorline nofoldenable
+  \ modifiable statusline=\  nocursorline nofoldenable
   if exists('&relativenumber')
     setlocal norelativenumber
   endif
